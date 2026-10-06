@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Add equipment')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/modifyarbeitsplatz/{id}(id=${arbeitsplatzId})}">← Workspace equipment</a>
+<div class="page-heading">
+<p class="eyebrow">THE TOOLS TO DO MORE</p>
+<h1>Equip a better workday.</h1>
+<p class="lead">Add the equipment available at this workspace.</p>
+</div>
+<section class="panel form-panel">
+<div class="alert" th:if="${error}" th:text="${error}" role="alert">
+</div>
+<form th:action="@{/addaustattung/{id}(id=${arbeitsplatzId})}" method="post">
+<div class="field"><label for="austattungName">Equipment name</label><input id="austattungName" name="austattungName" required maxlength="300" placeholder="e.g. hdmi or usbc"><small class="muted">Use hdmi or usbc to make this desk discoverable with those filters.</small>
+</div><button class="button" type="submit">Add equipment +</button>
+</form>
+<hr>
+<h2>Already available</h2>
+<div class="tags"><span class="tag" th:each="item : ${ausstatungs}" th:text="${item.name}"></span>
+</div>
+<p class="muted" th:if="${#lists.isEmpty(ausstatungs)}">No equipment added yet.</p><a class="text-link" th:href="@{/roomoverview}">Done — back to rooms →</a>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

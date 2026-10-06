@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Room management')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page">
+<section class="message-panel">
+<p class="eyebrow">ROOM MANAGEMENT</p>
+<h1>Manage your spaces.</h1>
+<p class="lead">Return to room management to update workspaces and equipment.</p><a class="button" th:href="@{/roomoverview}">View rooms →</a>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

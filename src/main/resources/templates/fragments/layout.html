@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(title)">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${title + ' · RoomMate'}">RoomMate</title>
+<link rel="stylesheet" th:href="@{/css/roommate.css}">
+<script defer th:src="@{/js/roommate.js}">
+</script>
+</head>
+<body>
+<header class="site-header" th:fragment="header(active)">
+<div class="header-inner">
+<a class="brand" th:href="@{/}" aria-label="RoomMate home"><span class="brand-icon" aria-hidden="true">r<span>m</span></span>RoomMate<span class="brand-dot">.</span></a>
+<nav aria-label="Main navigation"><a th:href="@{/chooseroom}" th:classappend="${active == 'book' ? 'active' : ''}">Book a workspace</a><a th:href="@{/search}" th:classappend="${active == 'search' ? 'active' : ''}">Find a desk</a><a sec:authorize="hasRole('ADMIN')" th:href="@{/roomoverview}" th:classappend="${active == 'admin' ? 'active' : ''}">Manage spaces</a>
+</nav>
+<div class="account"><a class="button small" sec:authorize="isAnonymous()" th:href="@{/oauth2/authorization/github}">Sign in with GitHub <span aria-hidden="true">↗</span></a>
+<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post"><button class="button ghost small" type="submit">Sign out <span aria-hidden="true">↗</span></button>
+</form>
+</div>
+</div>
+</header>
+<footer class="site-footer" th:fragment="footer"><span>RoomMate. A little space to do great things.</span><span>Find your place. Make it yours.</span>
+</footer>
+</body>
+</html>

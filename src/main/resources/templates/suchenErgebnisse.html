@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Available desks')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('search')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/search}">← Edit your search</a>
+<div class="page-heading">
+<p class="eyebrow">YOUR SEARCH RESULTS</p>
+<h1>Space for your next idea.</h1>
+<p class="lead">Choose a desk below to review and confirm your reservation.</p>
+</div>
+<div class="search-summary"><span class="badge" th:text="${datum}"></span><span th:text="${startzeit + ' – ' + endzeit}"></span><span class="result-count" th:text="${#lists.size(availableArbeitsplatz) + ' available desks'}"></span>
+</div>
+<div class="room-grid">
+<article class="panel result-card" th:each="place : ${availableArbeitsplatz}"><span class="desk-icon" aria-hidden="true">▱</span>
+<p class="eyebrow" th:text="${'ROOM ' + place.roomId}">
+</p>
+<h2 th:text="${place.name}">
+</h2>
+<div class="tags"><span class="tag" th:each="item : ${place.ausstatungs}" th:text="${item.name}"></span>
+</div><a class="button secondary full" th:href="@{/chooseplatz/{id}(id=${place.roomId},arbeitsplatzId=${place.arbeitsplatzId},tag=${datum},startTime=${startzeit},endTime=${endzeit})}">Choose this desk <span aria-hidden="true">→</span></a>
+</article>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(availableArbeitsplatz)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>No desks match this time</h2>
+<p>Try another time or fewer equipment filters to open up your options.</p>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

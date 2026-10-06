@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Choose a room')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('book')}">
+</header>
+<main id="main" class="page">
+<div class="page-heading">
+<p class="eyebrow">01 / FIND YOUR SPACE</p>
+<h1>Good work starts here.</h1>
+<p class="lead">Choose a room for your next focused session.</p>
+</div>
+<div class="section-bar">
+<h2>Explore rooms <span class="count" th:text="${#lists.size(allRooms)}">0</span>
+</h2><a class="text-link" th:href="@{/search}">Need specific equipment? <span aria-hidden="true">→</span></a>
+</div>
+<div class="room-grid">
+<article class="room-card" th:each="room, state : ${allRooms}">
+<div class="room-visual" th:classappend="${state.index % 3 == 1 ? 'peach' : (state.index % 3 == 2 ? 'blue' : '')}"><span class="room-number" th:text="${'ROOM / ' + room.roomId}"></span>
+<div class="room-diagram" aria-hidden="true"><i></i><i></i><i></i><i></i>
+</div>
+</div>
+<div class="room-card-content">
+<p class="eyebrow">A PLACE TO FOCUS</p>
+<h2 th:text="${room.name}">Room name</h2>
+<p>Pick your workspace and make time for what matters.</p><a class="button secondary full" th:href="@{/chooseplatz/{id}(id=${room.roomId})}">Choose this room <span aria-hidden="true">→</span></a>
+</div>
+</article>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(allRooms)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>No rooms just yet</h2>
+<p>Rooms will appear here once they have been added. Please check back soon.</p>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

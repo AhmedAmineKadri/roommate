@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Reservations')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/roomoverview}">← Room management</a>
+<div class="page-heading">
+<p class="eyebrow">ROOMMATE / ADMIN</p>
+<h1>Every booking, in one place.</h1>
+<p class="lead">Review reservations and remove bookings when needed.</p>
+</div>
+<div class="section-bar">
+<h2>Reservations <span class="count" th:text="${#lists.size(allreservation)}"></span>
+</h2>
+</div>
+<div class="panel table-panel" th:if="${!#lists.isEmpty(allreservation)}">
+<div class="table-scroll">
+<table><caption class="sr-only">All reservations</caption>
+<thead>
+<tr>
+<th scope="col">Booking</th>
+<th scope="col">Date</th>
+<th scope="col">Time</th>
+<th scope="col">Workspace</th>
+<th scope="col">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="booking : ${allreservation}">
+<td th:text="${'#' + booking.reservationId}">
+</td>
+<td th:text="${booking.tag}">
+</td>
+<td class="nowrap" th:text="${booking.startTime + ' – ' + booking.endTime}">
+</td>
+<td><a class="text-link" th:href="@{/modifyarbeitsplatz/{id}(id=${booking.arbeitsplatzId})}" th:text="${'Desk #' + booking.arbeitsplatzId}"></a>
+</td>
+<td>
+<form th:action="@{/deleteReservation/{id}(id=${booking.reservationId})}" method="post" data-confirm="Cancel this reservation? This cannot be undone."><button class="button danger small" type="submit">Cancel booking</button>
+</form>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(allreservation)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>Nothing on the calendar yet</h2>
+<p>Reservations will appear here when people book a workspace.</p>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+logging:
+    level:
+        root: error
+        org.springframework.jdbc.core: error
+
+spring:
+    datasource:
+        password: ${DB_PASSWORD:iamuser}
+        username: ${DB_USERNAME:user}
+        url: ${DB_URL:jdbc:postgresql://localhost:5432/RoomMate}
+
+    security:
+        oauth2:
+            client:
+                registration:
+                    github:
+                        client-id: ${CLIENT_ID}
+                        client-secret: ${CLIENT_SECRET}
+                        scope: read:public_repo
+
+roommate:
+    keymaster:
+        enabled: ${KEYMASTER_ENABLED:false}
+    rollen:
+        admin: ${ROOMMATE_ADMINS:}

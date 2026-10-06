@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Your space to focus')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('home')}">
+</header>
+<main id="main" class="page">
+<section class="hero">
+<div class="hero-copy">
+<p class="eyebrow"><span class="status-dot"></span> YOUR NEXT GOOD WORKDAY</p>
+<h1>A little space.<br>A lot of <em>possibility.</em>
+</h1>
+<p class="lead">Find a desk that fits your day. Choose your room, pick your time, and settle into something good.</p>
+<p class="welcome" sec:authorize="isAuthenticated()">Welcome back<span th:if="${username != null}" th:text="${', ' + username}"></span>.</p>
+<div class="actions"><a class="button" th:href="@{/chooseroom}">Find my workspace <span aria-hidden="true">↗</span></a><a class="text-link" th:href="@{/search}">Search by equipment <span aria-hidden="true">→</span></a>
+</div>
+<div class="hero-note"><span class="mini-icon" aria-hidden="true">✓</span> A room, a desk, a fresh start.</div>
+</div>
+<div class="workspace-art" role="img" aria-label="Illustration of a calm workspace with a desk, chair, plant and window">
+<div class="art-label">MAKE ROOM FOR FOCUS</div>
+<div class="art-window"><i></i><i></i><i></i><i></i>
+</div>
+<div class="art-sun">
+</div>
+<div class="art-plant"><i></i><i></i><i></i><b></b>
+</div>
+<div class="art-monitor"><span></span>
+</div>
+<div class="art-cup">
+</div>
+<div class="art-desk">
+</div>
+<div class="art-chair">
+</div>
+<div class="art-rug">
+</div>
+<div class="art-caption"><span class="status-dot"></span> Your day, your space.</div>
+</div>
+</section>
+<section class="how-it-works">
+<div>
+<p class="eyebrow">LESS PLANNING. MORE DOING.</p>
+<h2>Your desk in three steps.</h2>
+</div>
+<div class="step"><span>01</span>
+<h3>Choose your room</h3>
+<p>Find the right place to settle in.</p>
+</div>
+<div class="step"><span>02</span>
+<h3>Make time for it</h3>
+<p>Pick a desk and a time that work for you.</p>
+</div>
+<div class="step"><span>03</span>
+<h3>You’re all set</h3>
+<p>Confirm your booking and get to work.</p>
+</div>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

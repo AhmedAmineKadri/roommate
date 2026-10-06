@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Manage spaces')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page">
+<div class="page-heading">
+<p class="eyebrow">ROOMMATE / ADMIN</p>
+<h1>Spaces that work for everyone.</h1>
+<p class="lead">Manage rooms, workspaces, equipment and reservations.</p>
+</div>
+<div class="section-bar">
+<h2>Rooms <span class="count" th:text="${#lists.size(rooms)}"></span>
+</h2>
+<div class="actions"><a class="button secondary small" th:href="@{/allreservation}">View reservations</a><a class="button small" th:href="@{/addroom}">+ Add room</a>
+</div>
+</div>
+<div class="panel table-panel" th:if="${!#lists.isEmpty(rooms)}">
+<div class="table-scroll">
+<table><caption class="sr-only">Room management</caption>
+<thead>
+<tr>
+<th scope="col">Room</th>
+<th scope="col">ID</th>
+<th scope="col">Manage</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="room : ${rooms}">
+<td><strong th:text="${room.name}"></strong>
+</td>
+<td class="muted" th:text="${'#' + room.roomId}">
+</td>
+<td><a class="button secondary small" th:href="@{/modifyroom/{id}(id=${room.roomId})}">Manage workspaces →</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(rooms)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>Start with a room</h2>
+<p>Add a room, then fill it with workspaces and equipment.</p>
+</div>
+<p class="integration-note">Rooms can also be synchronized from KeyMaster. <a href="http://localhost:3000" target="_blank" rel="noopener">Open local KeyMaster ↗</a>
+</p>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

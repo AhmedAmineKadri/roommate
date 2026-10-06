@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Book your workspace')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('book')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/chooseroom}">← All rooms</a>
+<div class="page-heading">
+<p class="eyebrow">02 / MAKE IT YOURS</p>
+<h1>A desk. A date. Your day.</h1>
+<p class="lead">Choose a workspace and the time you need it.</p>
+</div>
+<div class="booking-layout">
+<section class="panel">
+<div class="panel-heading">
+<h2>Reservation details</h2><span class="badge" th:text="${'Room ' + roomId}"></span>
+</div>
+<div th:if="${error}" class="alert" role="alert" th:text="${error}">
+</div>
+<form th:if="${!#lists.isEmpty(arbeitsplatzs)}" th:action="@{/chooseplatz}" th:object="${reservation}" method="post" data-time-range><input type="hidden" name="roomId" th:value="${roomId}">
+<div class="field"><label for="arbeitsplatzId">Workspace</label><select id="arbeitsplatzId" th:field="*{arbeitsplatzId}" required aria-describedby="workspace-error"><option value="">Choose your desk</option><option th:each="place : ${arbeitsplatzs}" th:value="${place.arbeitsplatzId}" th:text="${place.name}"></option></select><small class="field-error" id="workspace-error" th:if="${#fields.hasErrors('arbeitsplatzId')}" th:errors="*{arbeitsplatzId}"></small>
+</div>
+<div class="field"><label for="tag">Date</label><input type="date" id="tag" th:field="*{tag}" required aria-describedby="date-error"><small class="field-error" id="date-error" th:if="${#fields.hasErrors('tag')}" th:errors="*{tag}"></small>
+</div>
+<div class="field-row">
+<div class="field"><label for="startTime">Start time</label><input type="time" id="startTime" th:field="*{startTime}" required data-start aria-describedby="start-error"><small class="field-error" id="start-error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></small>
+</div>
+<div class="field"><label for="endTime">End time</label><input type="time" id="endTime" th:field="*{endTime}" required data-end aria-describedby="end-error"><small class="field-error" id="end-error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></small>
+</div>
+</div>
+<div class="form-bottom">
+<p>We’ll check availability before confirming.</p><button class="button" type="submit">Confirm reservation <span aria-hidden="true">→</span></button>
+</div>
+</form>
+<div th:if="${#lists.isEmpty(arbeitsplatzs)}" class="empty-state">
+<h2>No desks in this room yet</h2>
+<p>Try another room to find your workspace.</p><a class="button secondary" th:href="@{/chooseroom}">Explore rooms</a>
+</div>
+</section>
+<aside class="booking-aside"><span class="aside-symbol" aria-hidden="true">✳</span>
+<h2>Make a little <br>room for focus.</h2>
+<p>Reserve only the time you need. Back-to-back bookings are welcome.</p>
+<hr>
+<p class="eyebrow">IN THIS ROOM</p>
+<div class="desk-summary" th:each="place : ${arbeitsplatzs}"><strong th:text="${place.name}"></strong>
+<div class="tags"><span class="tag" th:each="item : ${place.ausstatungs}" th:text="${item.name}"></span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Manage equipment')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/modifyroom/{id}(id=${arbeitsplatz.roomId})}">← Back to room</a>
+<div class="page-heading">
+<p class="eyebrow">WORKSPACE EQUIPMENT</p>
+<h1 th:text="${arbeitsplatz.name}">
+</h1>
+<p class="lead">Help people find the tools they need.</p>
+</div>
+<div class="section-bar">
+<h2>Equipment</h2><a class="button small" th:href="@{/addaustattung/{id}(id=${arbeitsplatzId})}">+ Add equipment</a>
+</div>
+<div class="panel table-panel" th:if="${!#lists.isEmpty(ausstatungList)}">
+<div class="table-scroll">
+<table><caption class="sr-only">Workspace equipment</caption>
+<thead>
+<tr>
+<th scope="col">Equipment</th>
+<th scope="col">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="item : ${ausstatungList}">
+<td><strong th:text="${item.name}"></strong>
+</td>
+<td>
+<form th:action="@{/platz/{id}/ausstatung/{name}(id=${arbeitsplatzId},name=${item.name})}" method="post" data-confirm="Remove this equipment from the workspace?"><button class="button danger small" type="submit">Remove</button>
+</form>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(ausstatungList)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>A clean slate</h2>
+<p>No equipment has been added to this workspace yet.</p>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Find a desk')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('search')}">
+</header>
+<main id="main" class="page">
+<div class="page-heading">
+<p class="eyebrow">FIND YOUR FIT</p>
+<h1>The right desk for your day.</h1>
+<p class="lead">Filter by time and equipment to find an available workspace.</p>
+</div>
+<div class="booking-layout">
+<section class="panel">
+<div class="panel-heading">
+<h2>What do you need?</h2><span class="badge">Workspace search</span>
+</div>
+<div class="alert" th:if="${error}" th:text="${error}" role="alert">
+</div>
+<form th:action="@{/search}" th:object="${period}" method="post" data-time-range>
+<fieldset><legend>Equipment <span class="muted">optional</span></legend>
+<div class="check-options"><label class="check-option"><input type="checkbox" name="equipment" value="hdmi" th:checked="${equipment != null and #lists.contains(equipment, 'hdmi')}"><span>HDMI</span></label><label class="check-option"><input type="checkbox" name="equipment" value="usbc" th:checked="${equipment != null and #lists.contains(equipment, 'usbc')}"><span>USB-C</span></label>
+</div>
+</fieldset>
+<div class="field"><label for="date">Date</label><input id="date" type="date" th:field="*{date}" required>
+</div>
+<div class="field-row">
+<div class="field"><label for="timeFrom">Start time</label><input id="timeFrom" type="time" th:field="*{timeFrom}" data-start required>
+</div>
+<div class="field"><label for="timeTo">End time</label><input id="timeTo" type="time" th:field="*{timeTo}" data-end required>
+</div>
+</div><button type="submit" class="button full">Find available desks <span aria-hidden="true">→</span></button>
+</form>
+</section>
+<aside class="booking-aside"><span class="aside-symbol" aria-hidden="true">⌕</span>
+<h2>A better fit. <br>A better workday.</h2>
+<p>Choose the equipment you need, or leave it open to explore every available desk.</p>
+<hr>
+<p>You’ll review your reservation before it is confirmed.</p>
+</aside>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

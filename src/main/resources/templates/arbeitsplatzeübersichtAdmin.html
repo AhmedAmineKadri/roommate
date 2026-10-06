@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Manage workspaces')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/roomoverview}">← Room management</a>
+<div class="page-heading">
+<p class="eyebrow">ROOM WORKSPACES</p>
+<h1 th:text="${room.name}">
+</h1>
+<p class="lead">Create desks and keep their equipment up to date.</p>
+</div>
+<div class="section-bar">
+<h2>Workspaces <span class="count" th:text="${#lists.size(arbeitsplatze)}"></span>
+</h2><a class="button small" th:href="@{/addarbeitsplatz/{id}(id=${roomId})}">+ Add workspace</a>
+</div>
+<div class="panel table-panel" th:if="${!#lists.isEmpty(arbeitsplatze)}">
+<div class="table-scroll">
+<table><caption class="sr-only">Workspaces in this room</caption>
+<thead>
+<tr>
+<th scope="col">Workspace</th>
+<th scope="col">Equipment</th>
+<th scope="col">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="place : ${arbeitsplatze}">
+<td><strong th:text="${place.name}"></strong>
+</td>
+<td>
+<div class="tags"><span class="tag" th:each="item : ${place.ausstatungs}" th:text="${item.name}"></span><span class="muted" th:if="${#lists.isEmpty(place.ausstatungs)}">No equipment</span>
+</div>
+</td>
+<td>
+<div class="actions"><a class="button secondary small" th:href="@{/modifyarbeitsplatz/{id}(id=${place.arbeitsplatzId})}">Edit equipment</a>
+<form th:action="@{/room/{roomId}/platz/{id}(roomId=${roomId},id=${place.arbeitsplatzId})}" method="post" data-confirm="Delete this workspace? This cannot be undone."><button class="button danger small" type="submit">Delete</button>
+</form>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="empty-state" th:if="${#lists.isEmpty(arbeitsplatze)}"><span class="empty-icon" aria-hidden="true">◇</span>
+<h2>Room for a new desk</h2>
+<p>Add your first workspace to make this room bookable.</p>
+</div>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

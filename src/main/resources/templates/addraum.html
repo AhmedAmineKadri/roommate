@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Add a room')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('admin')}">
+</header>
+<main id="main" class="page"><a class="back-link" th:href="@{/roomoverview}">← Back to management</a>
+<div class="page-heading">
+<p class="eyebrow">BUILD YOUR SPACE</p>
+<h1>Add a room.</h1>
+<p class="lead">Every good workspace starts with a room.</p>
+</div>
+<section class="panel form-panel">
+<div class="alert" th:if="${error}" th:text="${error}" role="alert">
+</div>
+<form th:action="@{/addroom}" method="post">
+<div class="field"><label for="roomName">Room name</label><input id="roomName" name="roomName" type="text" required maxlength="300" placeholder="e.g. The Studio" th:value="${name}"><small class="muted">Choose a name people will recognize.</small>
+</div>
+<div class="actions"><button class="button" type="submit">Create room →</button><a class="text-link" th:href="@{/roomoverview}">Cancel</a>
+</div>
+</form>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

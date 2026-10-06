@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Sign in')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('home')}">
+</header>
+<main id="main" class="page">
+<section class="message-panel"><span class="aside-symbol" aria-hidden="true">✳</span>
+<p class="eyebrow">WELCOME TO ROOMMATE</p>
+<h1>Your space is waiting.</h1>
+<p class="lead">Sign in with GitHub to find and reserve your workspace.</p>
+<div class="alert" th:if="${param.error}" role="alert">Sign-in didn’t complete. Please try again.</div>
+<div class="actions centered"><a class="button" th:href="@{/oauth2/authorization/github}">Continue with GitHub ↗</a><a class="text-link" th:href="@{/}">Back home</a>
+</div>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

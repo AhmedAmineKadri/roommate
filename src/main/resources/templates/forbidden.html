@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Access restricted')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('home')}">
+</header>
+<main id="main" class="page">
+<section class="message-panel">
+<p class="eyebrow">403 / ACCESS RESTRICTED</p>
+<h1>This space is private.</h1>
+<p class="lead">You don’t have permission to view this page.<br>You can still explore and book a workspace.</p><a class="button" th:href="@{/}">Back home →</a>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Something went wrong')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('home')}">
+</header>
+<main id="main" class="page">
+<section class="message-panel">
+<p class="eyebrow">LET’S GET YOU BACK</p>
+<h1>A little detour.</h1>
+<p class="lead">This page isn’t available right now. Try again, or head back to your workspace search.</p>
+<div class="actions centered"><a class="button" th:href="@{/chooseroom}">Explore rooms →</a><a class="text-link" th:href="@{/}">Back home</a>
+</div>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>

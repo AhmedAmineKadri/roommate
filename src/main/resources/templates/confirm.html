@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Booking confirmed')}">
+</head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header th:replace="~{fragments/layout :: header('book')}">
+</header>
+<main id="main" class="page">
+<section class="message-panel">
+<div class="success-icon" aria-hidden="true">✓</div>
+<p class="eyebrow">03 / YOU’RE ALL SET</p>
+<h1>Consider it booked.</h1>
+<p class="lead">Your workspace reservation is confirmed.<br>Here’s to a focused, productive day.</p>
+<div class="actions centered"><a class="button" th:href="@{/chooseroom}">Book another workspace <span aria-hidden="true">→</span></a><a class="text-link" th:href="@{/}">Back home</a>
+</div>
+</section>
+</main>
+<footer th:replace="~{fragments/layout :: footer}">
+</footer>
+</body>
+</html>
