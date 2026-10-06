@@ -57,7 +57,8 @@ time-range constraint was checked with invalid and valid values.
 The flow tests mock services; the JDBC tests use H2, not PostgreSQL. A passing
 suite does not verify live GitHub sign-in, external KeyMaster behavior,
 PostgreSQL-specific SQL, concurrent requests or production deployment.
-The configured GitHub workflow has not run until the public repository is created.
+The [GitHub Actions publication run](https://github.com/AhmedAmineKadri/roommate/actions/runs/37480957583)
+passed on 6 October 2026 using Java 21 on Ubuntu.
 
 After changes, run the appropriate tests and then the full suite. Treat service
 tests and database tests as complementary: mocks cannot detect incorrect SQL.
